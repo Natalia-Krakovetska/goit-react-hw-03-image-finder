@@ -1,21 +1,22 @@
 import { Component } from "react";
 import { SearchBar } from "./Searchbar/Searchbar";
+import { ImageGallery } from "./ImageGallery/ImageGallery";
 
 export class App extends Component {
+  state= {
+    name: '',
+   
+  };
+  addName = ({ name }) => {
+    this.setState({ name });
+  };
+
+
   render() { 
   return (
-  <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      <SearchBar />
+  <div>
+      <SearchBar onSubmit={this.addName}/>
+      <ImageGallery name={this.state.name}/>
     </div>)
   };
 };
-// key=31910031-2af744f88dbcdc5739401f7e8
