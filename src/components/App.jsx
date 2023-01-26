@@ -1,6 +1,8 @@
-export const App = () => {
-  return (
-    <div
+import { Component } from "react"
+
+export default class App extends Component {
+  render() { 
+  <div
       style={{
         height: '100vh',
         display: 'flex',
@@ -10,7 +12,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+      
     </div>
-  );
+  };
 };
