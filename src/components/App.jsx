@@ -1,7 +1,9 @@
-import { Component } from "react"
+import { Component } from "react";
+import { SearchBar } from "./Searchbar/Searchbar";
 
-export default class App extends Component {
+export class App extends Component {
   render() { 
+  return (
   <div
       style={{
         height: '100vh',
@@ -12,7 +14,8 @@ export default class App extends Component {
         color: '#010101'
       }}
     >
-      
-    </div>
+      <SearchBar />
+    </div>)
   };
 };
+// key=31910031-2af744f88dbcdc5739401f7e8
