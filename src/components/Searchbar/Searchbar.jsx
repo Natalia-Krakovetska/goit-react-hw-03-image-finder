@@ -23,7 +23,7 @@ export class SearchBar extends Component {
       };
       handleSubmit = event => {
         event.preventDefault();       
-        this.props.onSubmit(this.state.name);
+        this.props.onSubmit(this.state);
         // this.reset();
         };
 
