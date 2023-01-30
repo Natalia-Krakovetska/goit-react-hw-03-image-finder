@@ -1,7 +1,11 @@
 const BASE_URL = 'https://pixabay.com/api/';
-function FetchImages({ name }) {
+export function FetchApi({ name }) {
   return fetch(
-    `${BASE_URL}${name}?q=cat&page=1&key=31910031-2af744f88dbcdc5739401f7e8&image_type=photo&orientation=horizontal&per_page=12`
-  );
+    `${BASE_URL}?q=${name}&page=1&key=31910031-2af744f88dbcdc5739401f7e8&image_type=photo&orientation=horizontal&per_page=12`
+  ).then(resp => {
+    if (resp.ok) {
+      return resp.json();
+    }
+    return Promise.reject(new Error('NO'));
+  });
 }
-export { FetchImages };

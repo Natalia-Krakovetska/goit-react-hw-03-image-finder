@@ -1,30 +1,20 @@
 import { Component } from 'react';
-import { FetchImages } from '../../fetchImages';
+// import { FetchApi } from '../../fetchImages';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 export class ImageGallery extends Component {
-    state = {
-    name: '',
+    state = {    
 images: [],
     }
-    addSearchName = ({ name }) => {
-      this.setState({ name: this.props.name });
-    };
+
     addImages= ({ fetchRezult }) => {
       this.setState ({ images: fetchRezult, })};
+
+      
     componentDidUpdate(prevProps, prevState){
-        if (prevProps.name !== prevState.name){
+        if (prevProps.name !== this.props.name){
         console.log("ghbdtn");
-        const fetchRezult = FetchImages(this.state.name)
-        .then(resp => {
-          console.log(resp);
-          if (!resp.ok) {
-            throw new Error('statusText');
-          }
-          return resp.json();
-        })
-        .catch(err => console.log('Oops, there is no country with that name'));
-        return fetchRezult;
-        }
+        // return const data = FetchApi(this.props.name);
+       }
         };
     
     
@@ -33,7 +23,7 @@ images: [],
     return (
               <ul className="gallery">
         {this.state.images.map(image => (
-          <ImageGalleryItem image={this.state.name} />
+          <ImageGalleryItem image={this.props.name} />
         ))}
       </ul>
     );
