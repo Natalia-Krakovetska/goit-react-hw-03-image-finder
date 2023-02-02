@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { SearchBar } from "./Searchbar/Searchbar";
-import  ImageGallery  from "./ImageGallery/ImageGallery";
+import ImageGallery from "./ImageGallery/ImageGallery";
 import { fetchImages } from "../fetchImages";
 import { Modal } from "./Modal/Modal";
 import { Button } from "./Button/Button";
@@ -17,24 +17,9 @@ export class App extends Component {
     error: null,
     page: 1,
     showLoadMoreBtn: false,
-  };
-  addName = ({ searchValue }) => {
-    this.setState({ searchValue, page: 1, images: [] });
-  };
-  setLargeImgUrl = url => {
-    this.setState({ largeImgUrl: url });
-  };
+  }
 
-  onModalClose = () => {
-    this.setState({ largeImgUrl: '' });
-  };
-
-  loadMore = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
-  };
-async componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_, prevState) {
   const { searchValue, page } = this.state;
   if (prevState.searchValue !== searchValue || prevState.page !== page) {
     try {
@@ -60,6 +45,25 @@ async componentDidUpdate(_, prevState) {
 
 
 
+  addName = searchValue => {
+    this.setState({ searchValue, page: 1, images: [] });
+  };
+  setLargeImgUrl = url => {
+    this.setState({ largeImgUrl: url });
+  };
+
+  onModalClose = () => {
+    this.setState({ largeImgUrl: '' });
+  };
+
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
+
+
+
   render() { 
     const { images, error, isloading, largeImgUrl, showLoadMoreBtn } =
     this.state;
@@ -74,7 +78,8 @@ async componentDidUpdate(_, prevState) {
         {largeImgUrl && <Modal img={largeImgUrl} onClose={this.onModalClose} />}
         {showLoadMoreBtn && <Button onClick={this.loadMore} />}
         <ToastContainer autoClose={2000} pauseOnHover />
-  </AppWrapper>)
-  };
-  
-};
+  </AppWrapper>
+  );
+  }
+}
+
