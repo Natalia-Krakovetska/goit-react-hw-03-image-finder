@@ -1,31 +1,20 @@
-import { Component } from 'react';
-// import { FetchApi } from '../../fetchImages';
-import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
-export class ImageGallery extends Component {
-    state = {    
-images: [],
-    }
-
-    addImages= ({ fetchRezult }) => {
-      this.setState ({ images: fetchRezult, })};
-
-      
-    componentDidUpdate(prevProps, prevState){
-        if (prevProps.name !== this.props.name){
-        console.log("ghbdtn");
-        // return const data = FetchApi(this.props.name);
-       }
-        };
-    
-    
-    
-    render() {
-    return (
-              <ul className="gallery">
-        {this.state.images.map(image => (
-          <ImageGalleryItem image={this.props.name} />
-        ))}
-      </ul>
-    );
-  }
+import PropTypes from 'prop-types';
+import { Gallery } from './ImageGallery.styled';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+export default function ImageGallery({ images, setLargeImgUrl }) {
+  return (
+    <Gallery className="gallery">
+      {images.map(({ id, webformatURL, tags, largeImageURL })=> (
+        <ImageGalleryItem key={id}
+        webformatURL={webformatURL}
+        tags={tags}
+        largeImageURL={largeImageURL}
+        setLargeImgUrl={setLargeImgUrl} />
+      ))}
+    </Gallery>
+  );
 }
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  setLargeImgUrl: PropTypes.func.isRequired,
+};

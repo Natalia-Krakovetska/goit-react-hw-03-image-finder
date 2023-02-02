@@ -1,52 +1,60 @@
 import { Component } from 'react';
-
-// import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import { BsSearch } from 'react-icons/bs';
+import {
+  SearchbarWrapper,
+  SearchForm,
+  SearchFormButton,
+  SearchFormInput,
+} from './Searchbar.styled';
 
 
 export class SearchBar extends Component {
-    // static propTypes = {
-    //     onSubmit: PropTypes.func.isRequired,
-    //   };
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+      };
+
     state = {
-        name: "",
+      searchValue: "",
     }
     
     handleChange = event => {
         const { name, value } = event.target;
-        this.setState({ [name]: value, });
+        this.setState({ [name]: value.toLowerCase() });
 
       };
-      reset = () => {
-        this.setState({
-          name: '',
-        });
-      };
+
+
       handleSubmit = event => {
-        event.preventDefault();       
-        this.props.onSubmit(this.state);
-       
-        };
+        event.preventDefault();
+        if (this.state.searchValue.trim() === '') {
+          return toast.error('Please enter keyword for image search');
+        }
+        this.props.onSubmit(this.state.searchValue);
+        this.setState({ searchValue: '' });
+      };
 
   render() {
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button" >
-            <span className="button-label">Search</span>
-          </button>
+      <SearchbarWrapper >
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormButton type="submit">
+          <BsSearch fill="blue" />
+          </SearchFormButton>
 
-          <input
-            className="input"
-            name="name"
+          <SearchFormInput
+            
+            name="searchValue"
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={this.state.name}
+            value={this.state.searchValue}
             onChange={this.handleChange}
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchbarWrapper>
     );
   }
 }
