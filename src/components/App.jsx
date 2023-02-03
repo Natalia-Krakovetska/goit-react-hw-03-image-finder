@@ -77,7 +77,7 @@ export class App extends Component {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {largeImgUrl && <Modal img={largeImgUrl} onClose={this.onModalClose} />}
         {showLoadMoreBtn && <Button onClick={this.loadMore} />}
-        <ToastContainer autoClose={2000} pauseOnHover />
+        <ToastContainer />
   </AppWrapper>
   );
   }
