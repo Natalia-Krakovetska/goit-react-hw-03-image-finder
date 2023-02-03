@@ -26,7 +26,7 @@ export class App extends Component {
       this.setState({ isloading: true, error: null });
       const data = await fetchImages(searchValue, page);
       if (!data.totalHits) {
-        return toast.error(
+        return toast(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       }
