@@ -29,7 +29,7 @@ export class SearchBar extends Component {
       handleSubmit = event => {
         event.preventDefault();
         if (this.state.searchValue.trim() === '') {
-          return toast.error('Please enter keyword for image search');
+          return toast('Please enter keyword for image search');
         }
         this.props.onSubmit(this.state.searchValue);
         this.setState({ searchValue: '' });
