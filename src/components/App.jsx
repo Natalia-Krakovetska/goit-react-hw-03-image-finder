@@ -26,11 +26,14 @@ export class App extends Component {
       this.setState({ isloading: true, error: null });
       const data = await fetchImages(searchValue, page);
       if (!data.totalHits) {
-        return toast(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
+        // return toast(
+        //   'Sorry, there are no images matching your search query. Please try again.'
+        //   );
+         return toast.error('Sorry, there are no images matching your search query. Please try again.', {
+            icon: false
+          });
       }
-      toast.success(`Hooray! We found ${[data.totalHits]} images.`);
+      toast(`Hooray! We found ${[data.totalHits]} images.`);
       this.setState(prevState => ({
         images: [...prevState.images, ...data.hits],
         showLoadMoreBtn: page < Math.ceil(data.totalHits / 12),
