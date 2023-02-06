@@ -27,9 +27,7 @@ export class App extends Component {
       this.setState({ isloading: true, error: null });
       const data = await fetchImages(searchValue, page);
       if (!data.totalHits) {
-        // return toast(
-        //   'Sorry, there are no images matching your search query. Please try again.'
-        //   );
+        this.setState({ showLoadMoreBtn: false });
          return toast.error('Sorry, there are no images matching your search query. Please try again.', {
             icon: false
           });
@@ -81,7 +79,7 @@ export class App extends Component {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {largeImgUrl && <Modal img={largeImgUrl} onClose={this.onModalClose} />}
         {showLoadMoreBtn && <Button onClick={this.loadMore} />}
-        <ToastContainer />
+        <ToastContainer autoClose={2000} pauseOnHover closeOnClick/>
   </AppWrapper>
   );
   }
